@@ -1,0 +1,239 @@
+\documentclass[11pt, a4paper]{article}
+
+% --- PDFFLATEX COMPATIBLE PREAMBLE ---
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage[a4paper, top=1.5cm, bottom=1.5cm, left=1.5cm, right=1.5cm]{geometry}
+
+% Standard font for pdflatex to match the sans-serif look
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{textcomp} % Required for currency symbols in some pdflatex setups
+
+% PGFPlots settings for the grid graphs
+\pgfplotsset{compat=1.18}
+\definecolor{math-blue}{RGB}{0, 150, 214}
+\definecolor{grid-cyan}{RGB}{173, 235, 255}
+\definecolor{comet-blue}{RGB}{0, 85, 150}
+\definecolor{foundation-grey}{RGB}{150, 150, 150}
+
+% Custom command to draw the grids
+\newcommand{\polynomialgraph}[2]{%
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \begin{tikzpicture}[scale=0.6]
+            \begin{axis}[
+                axis lines=middle,
+                grid=both,
+                grid style={line width=.1pt, draw=grid-cyan},
+                major grid style={line width=.2pt, draw=grid-cyan},
+                xmin=-5, xmax=5,
+                ymin=-5, ymax=5,
+                xtick={-5,-4,...,5},
+                ytick={-5,-4,...,5},
+                xticklabels={},
+                yticklabels={},
+                tick style={draw=none},
+                axis line style={latex-latex, thick},
+                xlabel={$X$},
+                ylabel={$Y$},
+                label style={font=\small},
+                every axis x label/.style={at={(ticklabel* cs:1)},anchor=west},
+                every axis y label/.style={at={(ticklabel* cs:1)},anchor=south},
+                clip=false
+            ]
+                \node at (axis cs: 0.4,-0.4) {O};
+                \node at (axis cs: -5.6,0) {$X'$};
+                \node at (axis cs: 0,-5.6) {$Y'$};
+                #1 % Curve code
+            \end{axis}
+        \end{tikzpicture}\\
+        \small (#2)
+    \end{minipage}%
+}
+
+\begin{document}
+
+% --- HEADER WITH LOGO ---
+\noindent
+\begin{minipage}[t]{0.5\textwidth}
+    \begin{tikzpicture}[baseline=(current bounding box.north)]
+        % Stylistic logo representation
+        \node[anchor=west, inner sep=0, font=\Large\bfseries, text=comet-blue] (Logo) at (0,0.4) {IIITB COMET};
+        % Sub-text
+        \node[anchor=west, inner sep=0, font=\small\bfseries, text=foundation-grey] at (0,0) {F O U N D A T I O N};
+        
+        % Stylized signal icon - Positioned slightly above the 'T'
+        \begin{scope}[shift={(Logo.east)}, xshift=-0.18cm, yshift=0.3cm]
+            \draw[foundation-grey, line width=0.8pt] (-0.2, 0) arc (120:60:0.4);
+            \draw[foundation-grey, line width=0.8pt] (-0.25, 0.1) arc (120:60:0.5);
+            \draw[foundation-grey, line width=0.8pt] (-0.3, 0.2) arc (120:60:0.6);
+        \end{scope}
+    \end{tikzpicture}
+\end{minipage}%
+\begin{minipage}[t]{0.5\textwidth}
+    \raggedleft
+    \small
+    \textbf{Name: Jera Prakash} \\
+    \textbf{ID: cometfwc38} \\
+    \textbf{Date: 20-01-2026}
+\end{minipage}
+
+\vspace{0.8cm}
+
+% --- PAGE 1: EXERCISE 2.1 ---
+\begin{center}
+    \large \textbf{\textcolor{math-blue}{EXERCISE 2.1}}
+\end{center}
+
+\vspace{0.2cm}
+
+\noindent
+\textbf{1. The graphs of $y = p(x)$ are given in Fig. 2.10 below, for some polynomials $p(x)$. Find the number of zeroes of $p(x)$, in each case.}
+
+\vspace{0.8cm}
+
+\begin{center}
+    % Row 1
+    \polynomialgraph{
+        \draw[ultra thick, black] (axis cs: -4.5, 2) -- (axis cs: 4.5, 2);
+    }{i}
+    \hfill
+    \polynomialgraph{
+        \draw[ultra thick, black] plot [smooth, tension=1] coordinates { (axis cs: -4, -3.5) (axis cs: -1.5, 0.5) (axis cs: 1, -1.5) (axis cs: 3.5, 4) };
+    }{ii}
+
+    \vspace{1.2cm}
+
+    % Row 2
+    \polynomialgraph{
+        \draw[ultra thick, black] plot [smooth, tension=1] coordinates { (axis cs: -4.5, -2) (axis cs: -2.5, 2) (axis cs: 0, -1.5) (axis cs: 2.5, 1.5) (axis cs: 4.5, -3) };
+    }{iii}
+    \hfill
+    \polynomialgraph{
+        \draw[ultra thick, black] plot [smooth, tension=0.8] coordinates { (axis cs: -3, 3) (axis cs: 0, -0.5) (axis cs: 3, 3) };
+    }{iv}
+
+    \vspace{1.2cm}
+
+    % Row 3
+    \polynomialgraph{
+        \draw[ultra thick, black] plot [smooth, tension=0.8] coordinates { (axis cs: -4.5, -4) (axis cs: -2, 2) (axis cs: 0, -1.5) (axis cs: 2, 3) (axis cs: 4.5, -4) };
+    }{v}
+    \hfill
+    \polynomialgraph{
+        \draw[ultra thick, black] plot [smooth, tension=0.8] coordinates { (axis cs: -4.5, 1.5) (axis cs: -2.5, 0) (axis cs: -1, -1.5) (axis cs: 0.5, 1) (axis cs: 2, 0) (axis cs: 3, 1) (axis cs: 4.5, 0) (axis cs: 5, -1) };
+    }{vi}
+
+    \vspace{0.6cm}
+    \textbf{Fig. 2.10}
+\end{center}
+
+\newpage
+
+% --- PAGE 2: EXERCISE 3.1 & 3.2 ---
+\begin{center}
+    \large \textbf{\textcolor{math-blue}{EXERCISE 3.1}}
+\end{center}
+
+\vspace{0.3cm}
+
+\begin{enumerate}[label=\textbf{\arabic*.}, leftmargin=1.5em, itemsep=1em]
+    \item Aftab tells his daughter, ``Seven years ago, I was seven times as old as you were then. Also, three years from now, I shall be three times as old as you will be.'' Represent this situation algebraically and graphically.
+
+    \item The coach of a cricket team buys 3 bats and 6 balls for \text{₹} 3900. Later, she buys another bat and 3 more balls of the same kind for \text{₹} 1300. Represent this situation algebraically and geometrically.
+
+    \item The cost of 2 kg of apples and 1 kg of grapes on a day was found to be \text{₹} 160. After a month, the cost of 4 kg of apples and 2 kg of grapes is \text{₹} 300. Represent the situation algebraically and geometrically.
+\end{enumerate}
+
+\vspace{0.5cm}
+\begin{center}
+    \large \textbf{\textcolor{math-blue}{EXERCISE 3.2}}
+\end{center}
+\vspace{0.3cm}
+
+\begin{enumerate}[label=\textbf{\arabic*.}, leftmargin=1.5em]
+    \item Form the pair of linear equations in the following problems, and find their solutions graphically.
+    \begin{enumerate}[label=(\roman*), leftmargin=2em]
+        \item 10 students of Class X took part in a Mathematics quiz. If the number of girls is 4 more than the number of boys, find the number of boys and girls who took part in the quiz.
+        \item 5 pencils and 7 pens together cost \text{₹} 50, whereas 7 pencils and 5 pens together cost \text{₹} 46. Find the cost of one pencil and that of one pen.
+    \end{enumerate}
+
+    \item On comparing the ratios $\frac{a_1}{a_2}, \frac{b_1}{b_2}$ and $\frac{c_1}{c_2}$, find out whether the lines representing the following pairs of linear equations intersect at a point, are parallel or coincident:
+    \begin{center}
+        \begin{tabular}{p{0.45\textwidth}p{0.45\textwidth}}
+            (i) $5x - 4y + 8 = 0$ & (ii) $9x + 3y + 12 = 0$ \\
+            \hspace{0.5cm} $7x + 6y - 9 = 0$ & \hspace{0.5cm} $18x + 6y + 24 = 0$ \\ [0.3cm]
+            (iii) $6x - 3y + 10 = 0$ & \\
+            \hspace{0.5cm} $2x - y + 9 = 0$ &
+        \end{tabular}
+    \end{center}
+
+    \item On comparing the ratios $\frac{a_1}{a_2}, \frac{b_1}{b_2}$ and $\frac{c_1}{c_2}$, find out whether the following pair of linear equations are consistent, or inconsistent.
+    \begin{center}
+        \begin{tabular}{p{0.45\textwidth}p{0.45\textwidth}}
+            (i) $3x + 2y = 5; \quad 2x - 3y = 7$ & (ii) $2x - 3y = 8; \quad 4x - 6y = 9$ \\ [0.3cm]
+            (iii) $\frac{3}{2}x + \frac{5}{3}y = 7; \quad 9x - 10y = 14$ & (iv) $5x - 3y = 11; \quad -10x + 6y = -22$ \\ [0.3cm]
+            (v) $\frac{4}{3}x + 2y = 8; \quad 2x + 3y = 12$ & 
+        \end{tabular}
+    \end{center}
+
+    \item Which of the following pairs of linear equations are consistent/inconsistent? If consistent, obtain the solution graphically:
+    \begin{center}
+        \begin{tabular}{p{0.45\textwidth}p{0.45\textwidth}}
+            (i) $x + y = 5, \quad 2x + 2y = 10$ & (ii) $x - y = 8, \quad 3x - 3y = 16$ \\ [0.3cm]
+            (iii) $2x + y - 6 = 0, \quad 4x - 2y - 4 = 0$ & (iv) $2x - 2y - 2 = 0, \quad 4x - 4y - 5 = 0$ 
+        \end{tabular}
+    \end{center}
+
+    \item Half the perimeter of a rectangular garden, whose length is 4 m more than its width, is 36 m. Find the dimensions of the garden.
+
+    \item Given the linear equation $2x + 3y - 8 = 0$, write another linear equation in two variables such that the geometrical representation of the pair so formed is:
+    \begin{enumerate}[label=(\roman*), leftmargin=2.5em]
+        \item intersecting lines \hfill (ii) parallel lines \hfill (iii) coincident lines \hspace{2cm}
+    \end{enumerate}
+
+    \item Draw the graphs of the equations $x - y + 1 = 0$ and $3x + 2y - 12 = 0$. Determine the coordinates of the vertices of the triangle formed by these lines and the $x$-axis, and shade the triangular region.
+\end{enumerate}
+
+\vspace{0.5cm}
+\begin{center}
+    \large \textbf{\textcolor{math-blue}{EXERCISE 3.3}}
+\end{center}
+\vspace{0.3cm}
+
+\begin{enumerate}[label=\textbf{\arabic*.}, leftmargin=1.5em]
+    \item Solve the following pair of linear equations by the substitution method.
+    \begin{center}
+        \begin{tabular}{p{0.45\textwidth}p{0.45\textwidth}}
+            (i) $x + y = 14$ & (ii) $s - t = 3$ \\
+            \hspace{0.5cm} $x - y = 4$ & \hspace{0.5cm} $\frac{s}{3} + \frac{t}{2} = 6$ \\ [0.6cm]
+            (iii) $3x - y = 3$ & (iv) $0.2x + 0.3y = 1.3$ \\
+            \hspace{0.6cm} $9x - 3y = 9$ & \hspace{0.6cm} $0.4x + 0.5y = 2.3$ \\ [0.6cm]
+            (v) $\sqrt{2}x + \sqrt{3}y = 0$ & (vi) $\frac{3x}{2} - \frac{5y}{3} = -2$ \\ [0.2cm]
+            \hspace{0.6cm} $\sqrt{3}x - \sqrt{8}y = 0$ & \hspace{0.6cm} $\frac{x}{3} + \frac{y}{2} = \frac{13}{6}$ 
+        \end{tabular}
+    \end{center}
+
+    \item Solve $2x + 3y = 11$ and $2x - 4y = -24$ and hence find the value of `$m$' for which $y = mx + 3$.
+
+    \item Form the pair of linear equations for the following problems and find their solution by substitution method.
+    \begin{enumerate}[label=(\roman*), leftmargin=2em, itemsep=1em]
+        \item The difference between two numbers is 26 and one number is three times the other.
+        \item The larger of two supplementary angles exceeds the smaller by 18 degrees.
+        \item The coach of a cricket team buys 7 bats and 6 balls for \text{₹} 3800. Later, she buys 3 bats and 5 balls for \text{₹} 1750.
+        \item The taxi charges in a city consist of a fixed charge together with the charge for the distance covered. For a distance of 10 km, the charge paid is \text{₹} 105 and for a journey of 15 km, the charge paid is \text{₹} 155.
+        \item A fraction becomes $\frac{9}{11}$, if 2 is added to both the numerator and the denominator. If 3 is added to both, it becomes $\frac{5}{6}$.
+        \item Five years hence, the age of Jacob will be three times that of his son. Five years ago, it was seven times.
+    \end{enumerate}
+\end{enumerate}
+
+\end{document}
