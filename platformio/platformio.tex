@@ -1,0 +1,158 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage[a4paper,margin=2cm]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{enumitem}
+\usepackage{titlesec}
+
+% Prevent vertical stretching
+\raggedbottom
+
+% Compact spacing
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{4pt}
+\titlespacing*{\section}{0pt}{6pt}{6pt}
+
+\begin{document}
+
+% ================= HEADER =================
+\noindent
+\includegraphics[width=4cm]{logo.jpeg}
+
+\vspace{0.3cm}
+
+{\large \textbf{IIITB COMET FOUNDATION}} \\ 
+\textbf{Name:} Jera Prakash \\
+\textbf{Batch:} COMETFWC038 \\
+\textbf{Date:} \today
+
+\vspace{0.3cm}
+\hrule
+\vspace{0.4cm}
+
+% ================= QUESTION =================
+
+\section*{GATE CS 2019 – Question 6 Analysis}
+
+\textbf{Question:}
+
+In 16-bit 2’s complement representation, the decimal number $-28$ is:
+
+(A) 1111 1111 0001 1100  
+(B) 0000 0000 1110 0100  
+(C) 1111 1111 1110 0100  
+(D) 1000 0000 1110 0100  
+
+\vspace{0.2cm}
+\hrule
+\vspace{0.3cm}
+
+\textbf{Step 1: Convert +28 to Binary}
+
+\[
+28_{10} = 11100_2
+\]
+
+16-bit form:
+
+\[
+0000\ 0000\ 0001\ 1100
+\]
+
+\textbf{Step 2: 1’s Complement}
+
+\[
+1111\ 1111\ 1110\ 0011
+\]
+
+\textbf{Step 3: Add 1}
+
+\[
+1111\ 1111\ 1110\ 0011
++
+0000\ 0000\ 0000\ 0001
+=
+\mathbf{1111\ 1111\ 1110\ 0100}
+\]
+
+\textbf{Correct Option: (C)}
+
+% ================= HARDWARE =================
+
+\section*{Hardware Implementation}
+
+Verified using Arduino UNO.
+
+\textbf{PlatformIO Code:}
+
+\begin{verbatim}
+#include <Arduino.h>
+#include <stdint.h>
+
+int16_t num = 28;
+int16_t twos_comp;
+
+void setup() {
+    twos_comp = -num;
+}
+
+void loop() {
+}
+\end{verbatim}
+
+\textbf{Components Used:}
+
+\begin{itemize}[noitemsep]
+\item Arduino UNO
+\item Breadboard
+\item Common Anode 7-Segment Display
+\item 220$\Omega$ Resistor
+\item Jumper Wires
+\end{itemize}
+
+\textbf{Pin Connections:}
+
+\begin{center}
+\begin{tabular}{|l|l|}
+\hline
+Segment a & Digital 2 \\ \hline
+Segment b & Digital 3 \\ \hline
+Segment c & Digital 4 \\ \hline
+Segment d & Digital 5 \\ \hline
+Segment e & Digital 6 \\ \hline
+Segment f & Digital 7 \\ \hline
+Segment g & Digital 8 \\ \hline
+GND & GND \\ \hline
+VCC & 5V \\ \hline
+\end{tabular}
+\end{center}
+
+\textbf{Observation:}
+
+The display showed \textbf{1}, confirming correctness.
+
+% ================= OUTPUT =================
+
+\section*{Hardware Output}
+
+\begin{center}
+\includegraphics[height=7.5cm]{output.jpeg}
+\end{center}
+
+\vspace{-0.2cm}
+
+\textbf{Conclusion:}
+
+The 16-bit 2’s complement of -28 is:
+
+\[
+1111\ 1111\ 1110\ 0100
+\]
+
+Hardware and theoretical results match.
+
+\enlargethispage{1cm}
+
+\end{document}
